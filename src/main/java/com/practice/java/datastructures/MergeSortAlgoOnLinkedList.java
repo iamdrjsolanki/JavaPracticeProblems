@@ -1,6 +1,6 @@
 package com.practice.java.datastructures;
 
-import com.practice.datastructures.PracticeLinkedList.Node;
+import com.practice.java.datastructures.PracticeLinkedList.Node;
 
 /*
  * Merge sort is often preferred for sorting a linked list. 

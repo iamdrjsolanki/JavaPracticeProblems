@@ -1,13 +1,14 @@
 package com.practice.java.datastructures;
 
-import java.util.*;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class ImplementStackIn2Queues {
   
     static class Stack { 
         // Two inbuilt queues 
-        static Queue<Integer> q1 = new LinkedList<Integer>(); 
-        static Queue<Integer> q2 = new LinkedList<Integer>(); 
+        static Queue<Integer> q1 = new LinkedList<Integer>();
+        static Queue<Integer> q2 = new LinkedList<Integer>();
   
         // To maintain current number of 
         // elements 
@@ -33,7 +34,7 @@ public class ImplementStackIn2Queues {
             } 
   
             // swap the names of two queues 
-            Queue<Integer> q = q1; 
+            Queue<Integer> q = q1;
             q1 = q2; 
             q2 = q; 
         } 

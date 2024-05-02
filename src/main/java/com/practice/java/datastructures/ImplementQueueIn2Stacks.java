@@ -4,16 +4,16 @@ import java.util.*;
 
 public class ImplementQueueIn2Stacks {
   
-    static class Queue { 
+    /*static class Queue {
         // Two inbuilt queues 
-        static Queue<Integer> q1 = new LinkedList<Integer>(); 
-        static Queue<Integer> q2 = new LinkedList<Integer>(); 
+        static Queue<Integer> q1 = new LinkedList<Integer>();
+        static Queue<Integer> q2 = new LinkedList<Integer>();
   
         // To maintain current number of 
         // elements 
         static int curr_size; 
   
-        Stack() 
+        Stack()
         { 
             curr_size = 0; 
         } 
@@ -64,7 +64,7 @@ public class ImplementQueueIn2Stacks {
     // driver code 
     public static void main(String[] args) 
     { 
-        Stack s = new Stack(); 
+        Stack s = new Stack();
         s.push(1); 
         s.push(2); 
         s.push(3); 
@@ -77,5 +77,5 @@ public class ImplementQueueIn2Stacks {
         System.out.println(s.top()); 
   
         System.out.println("current size: " + s.size()); 
-    } 
+    } */
 }

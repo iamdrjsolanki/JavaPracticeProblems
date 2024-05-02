@@ -20,9 +20,16 @@ Number of paths -> 4
 
 public class CountPaths {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	static int n = 6, m = 5;
+	static int[][] arr = { { 1, 1, 0, 0, 0, 0 },
+					{ 1, 1, 1, 0, 0, 0 },
+					{ 0, 1, 1, 1, 1, 1 },
+					{ 0, 0, 0, 1, 0, 1 }
+					};
+	static int counter = 0;
 
+	public static void main(String[] args) {
+		countPaths();
 	}
 	
 	static void countPaths() {
@@ -36,16 +43,16 @@ public class CountPaths {
 	static int checkNext(int i, int j) {
 	    if(arr[i][j+1] == 1) {
 	        if(i== n && j==m) {
-	            counter++;
-	        }else {
+	            return counter++;
+	        } else {
 	            if(i==n) {
-	                checkNext(i+1, j);
+	                return checkNext(i+1, j);
 	            } else {
-	                checkNext(i, j+1);
+	                return checkNext(i, j+1);
 	            } 
 	        }
 	    } else if(arr[i+1][j] == 1) {
-	        checkNext(i+1, j);
+	        return checkNext(i+1, j);
 	    } else { return -1;}
 	}
 
