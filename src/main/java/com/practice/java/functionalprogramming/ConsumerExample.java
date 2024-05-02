@@ -44,6 +44,8 @@ public class ConsumerExample {
                         instructorConsumer2.andThen(instructorConsumer3).accept(x);
                     }
                 }
+
+
         );
 
     }
