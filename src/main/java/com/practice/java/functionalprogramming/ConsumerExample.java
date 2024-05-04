@@ -2,6 +2,9 @@ package com.practice.java.functionalprogramming;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
+import java.util.function.IntConsumer;
+import java.util.function.LongConsumer;
 
 public class ConsumerExample {
 
@@ -44,9 +47,22 @@ public class ConsumerExample {
                         instructorConsumer2.andThen(instructorConsumer3).accept(x);
                     }
                 }
-
-
         );
+
+        /**
+         * Specialised Consumers
+         * IntConsumer, LongConsumer, DoubleConsumer
+         */
+
+        IntConsumer intConsumer1 = (a) -> System.out.println(a*10);
+        intConsumer1.accept(5);
+
+        LongConsumer longConsumer = (a) -> System.out.println(a*10L);
+        longConsumer.accept(5L);
+
+        DoubleConsumer doubleConsumer = (a) -> System.out.println(a*10.0);
+        doubleConsumer.accept(5.0);
+
 
     }
 
