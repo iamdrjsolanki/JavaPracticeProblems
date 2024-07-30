@@ -1,4 +1,4 @@
-package com.practice.java.datastructures;
+package com.practice.java.datastructures.linkedlist;
 
 public class MidEleLinkedList {
 	

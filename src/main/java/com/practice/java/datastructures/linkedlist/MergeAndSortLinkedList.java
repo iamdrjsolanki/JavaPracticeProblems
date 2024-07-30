@@ -1,6 +1,6 @@
-package com.practice.java.datastructures;
+package com.practice.java.datastructures.linkedlist;
 
-import com.practice.java.datastructures.PracticeLinkedList.Node;
+import com.practice.java.datastructures.linkedlist.PracticeLinkedList.Node;
 
 public class MergeAndSortLinkedList {
 	

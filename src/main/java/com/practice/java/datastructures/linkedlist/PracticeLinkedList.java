@@ -1,4 +1,13 @@
-package com.practice.java.datastructures;
+package com.practice.java.datastructures.linkedlist;
+
+/**
+ * Following operations are done on the linkedlist created class
+ * addAtFront(10);
+ * addAtAPosition(11, 2);
+ * remove(1);
+ * removeAtAPosition(2);
+ * reverse(list.head);
+ */
 
 public class PracticeLinkedList {
 	
@@ -171,15 +180,15 @@ public class PracticeLinkedList {
 		list.addAtFront(10);
 		System.out.println("Size:"+list.size());
 		list.printLinkedList();
-		
+
 		list.addAtAPosition(11, 2);
 		System.out.println("Size:"+list.size());
 		list.printLinkedList();
-		
+
 		list.remove(1);
 		System.out.println("Size:"+list.size());
 		list.printLinkedList();
-		
+
 		list.removeAtAPosition(2);
 		System.out.println("Size:"+list.size());
 		list.printLinkedList();
