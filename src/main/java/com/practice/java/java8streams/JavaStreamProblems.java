@@ -8,9 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class JavaStreamProblems {
 
@@ -26,24 +26,24 @@ public class JavaStreamProblems {
 
         System.out.println("Sort a given list of decimals in reverse order : " + sortListInReverese());
 
-        System.out.println("Sort a given list of decimals in reverse order" + sortListOfDecimalsInReverse());
-        System.out.println("Join a list of strings with '[' as prefix, ']' as suffix, and ',' as delimiter" + joinListOfString());
-        System.out.println("Print the numbers from a given list of integers that are multiples of 5." + printMultipleOf5());
+        System.out.println("Sort a given list of decimals in reverse order: " + sortListOfDecimalsInReverse());
+        System.out.println("Join a list of strings with '[' as prefix, ']' as suffix, and ',' as delimiter: " + joinListOfString());
+        System.out.println("Print the numbers from a given list of integers that are multiples of 5: " + printMultipleOf5());
         System.out.println("Find the maximum and minimum of a list of integers." + minAndMaxOfIntegers());
-//        System.out.println("Merge two unsorted arrays into a single sorted array using Java 8 streams. Write a Java 8 program to merge two unsorted arrays into a single sorted array using the stream API." + );
-//        System.out.println("Merge two unsorted arrays into a single sorted array without duplicates. Write a Java 8 program to merge two unsorted arrays into a single sorted array without duplicates." + );
-//        System.out.println("Get the three maximum and three minimum numbers from a given list of integers. Write a Java 8 program to get the three maximum and three minimum numbers from a given list of integers." + );
-//        System.out.println("Check if two strings are anagrams or not using Java 8 streams. Write a Java 8 program to check if two strings are anagrams or not using the stream API and lambda expressions." + );
-//        System.out.println("Find the sum of all digits of a number in Java 8. Write a Java 8 program to find the sum of all digits of a given number." + );
-//        System.out.println("Find the second largest number in an integer array. Write a Java 8 program to find the second largest number in an integer array." + );
-//        System.out.println("Sort a list of strings according to the increasing order of their length. Write a Java 8 program to sort a given list of strings according to the increasing order of their length." + );
-//        System.out.println("Find the sum and average of all elements in an integer array. Write a Java 8 program to find the sum and average of all elements in an integer array." + );
-//        System.out.println("Find the common elements between two arrays. Write a Java 8 program to find the common elements between two arrays using streams." + );
-//        System.out.println("Reverse each word of a string using Java 8 streams. Write a Java 8 program to reverse each word of a given string using the stream API and lambda expressions." + );
-//        System.out.println("Find the sum of the first 10 natural numbers. Write a Java 8 program to find the sum of the first 10 natural numbers using streams." + );
-//        System.out.println("Reverse an integer array. Write a Java 8 program to reverse an integer array." + );
-//        System.out.println("Print the first 10 even numbers. Write a Java 8 program to print the first 10 even numbers." + );
-//        System.out.println("Find the most repeated element in an array. Write a Java 8 program to find the most repeated element in an array." + );
+        System.out.println("Merge two unsorted arrays into a single sorted array using Java 8 streams: " + sortAndMergeTwoArrays());
+        System.out.println("Merge two unsorted arrays into a single sorted array without duplicates: " + sortAndMergeTwoArraysWithoutDuplicates());
+        System.out.println("Get the three maximum and three minimum numbers from a given list of integers : "); getThreeMaxAndThreeMinNumbers();
+        System.out.println("Check if two strings are anagrams or not using Java 8 streams: " + checkStringAnagrams());
+        System.out.println("Find the sum of all digits of a number in Java 8 : " + sumOfAllDigits());
+        System.out.println("Find the second largest number in an integer array : " + getSecondLargestNumber());
+        System.out.println("Sort a list of strings according to the increasing order of their length : " + sortStringsIncreasingOrderOfLength());
+        System.out.println("Find the sum and average of all elements in an integer array : "); findSumAndAvg();
+        System.out.println("Find the common elements between two arrays : " + findCommonElementsInTwoArrays());
+        System.out.println("Reverse each word of a string using Java 8 streams : " + reverseStrings());
+        System.out.println("Find the sum of the first 10 natural numbers : " + sumOfFirst5NaturalNumbers());
+        System.out.println("Reverse an integer array : " + reverseIntegerArray());
+        System.out.println("Print the first 5 even numbers : " + getFirst5EvenNumbers());
+        System.out.println("Find the most repeated element in an array : " + findMostRepeatedNumber());
 //        System.out.println("Check if a string is a palindrome using Java 8 streams. Write a Java 8 program to check if a given string is a palindrome using the stream API and lambda expressions." + );
 //        System.out.println("Find strings in a list that start with a number. Given a list of strings, write a Java 8 program to find the strings that start with a number." + );
 //        System.out.println("Extract duplicate elements from an array. Write a Java 8 program to extract duplicate elements from an array." + );
@@ -54,6 +54,20 @@ public class JavaStreamProblems {
 //        System.out.println("Print the first 10 odd numbers. Write a Java 8 program to print the first 10 odd numbers." + );
 //        System.out.println("Get the last element of an array. Write a Java 8 program to get the last element of an array." + );
 //        System.out.println("Calculate the age of a person in years. Write a Java 8 program to calculate the age of a person in years given their birthday.");
+
+        List<Item> items = new ArrayList<>();
+        items.add(new Item(123));
+        items.add(new Item(456));
+        items.add(new Item(123));
+        items.add(new Item(789));
+
+        Transaction transaction1 = new Transaction(items);
+        Transaction transaction2 = new Transaction(List.of(new Item(123)));
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.add(transaction1); transactionList.add(transaction2);
+
+        System.out.println("Count all the items which has id 123 in transactionsList: " + countItemIds(transactionList, 123));
+
 
     }
 
@@ -113,4 +127,114 @@ public class JavaStreamProblems {
         return collection;
     }
 
+    private static List<Integer> sortAndMergeTwoArrays() {
+        List<List<Integer>> integers = List.of(List.of(7, 4, 9, 2, 1), List.of(5, 9, 6, 0, 8));
+        return integers.stream()
+                .flatMap(Collection::stream)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    private static Set<Integer> sortAndMergeTwoArraysWithoutDuplicates() {
+        List<List<Integer>> integers = List.of(List.of(7, 4, 9, 2, 1), List.of(5, 9, 6, 0, 8));
+        return integers.stream()
+                .flatMap(Collection::stream)
+                .sorted()
+                .collect(Collectors.toSet());
+    }
+
+    private static void getThreeMaxAndThreeMinNumbers() {
+        List<Integer> integers = List.of(7, 4, 9, 2, 1, 5, 9, 6, 0, 8);
+        List<Integer> threeMax = integers.stream().sorted(Comparator.comparingInt(a -> (int) a).reversed()).limit(3).collect(Collectors.toList());
+        List<Integer> threeMin = integers.stream().sorted(Comparator.comparingInt(a -> a)).limit(3).collect(Collectors.toList());
+        System.out.println("Max three: "+ threeMax);
+        System.out.println("Min three: "+ threeMin);
+    }
+
+    private static boolean checkStringAnagrams() {
+        String s1 = "act";
+        String s2 = "tac";
+        String sortedStr1 = s1.toLowerCase().chars().sorted()
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+        String sortedStr2 = s2.toLowerCase().chars().sorted()
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+        return sortedStr1.equals(sortedStr2);
+    }
+
+    private static int sumOfAllDigits() {
+        List<Integer> integers = List.of(7, 4, 9, 2);
+        return integers.stream().reduce(0, Integer::sum);
+    }
+
+    private static int getSecondLargestNumber() {
+        List<Integer> integers = List.of(7, 4, 9, 2, 1, 5, 6, 0, 8);
+        return integers.stream().sorted(Comparator.comparingInt(a -> (int) a).reversed()).skip(1).findFirst().get();
+    }
+
+    private static List<String> sortStringsIncreasingOrderOfLength() {
+        List<String> strings = List.of("asdf", "qwerty", "as", "a", "wer");
+        return strings.stream().sorted(Comparator.comparing(String::length)).collect(Collectors.toList());
+    }
+
+    private static void findSumAndAvg() {
+        List<Integer> integers = List.of(7, 4, 9, 2);
+        System.out.println("Sum of the integers: " + integers.stream().reduce(0, Integer::sum));
+        System.out.println("Avg of the integers: " + integers.stream().collect(Collectors.averagingInt(b -> b)));
+    }
+
+    private static List<Integer> findCommonElementsInTwoArrays() {
+        List<Integer> integers = List.of(7, 0, 9, 2, 1);
+        List<Integer> integers2 = List.of(5, 9, 6, 0, 8);
+        return integers.stream().distinct().filter(integers2::contains).collect(Collectors.toList());
+    }
+
+    private static List<String> reverseStrings() {
+        List<String> strings = List.of("asdf", "qwerty", "as", "a", "wer");
+        return strings.stream().map(s -> new StringBuilder(s).reverse().toString()).collect(Collectors.toList());
+    }
+
+    private static int sumOfFirst5NaturalNumbers() {
+        List<Integer> integers = List.of(7, 4, 9, 2, 1, 5, 6, 0, 8);
+        return integers.stream().sorted().limit(5).reduce(0, Integer::sum);
+    }
+
+    private static String reverseIntegerArray() {
+        int[] integers = {7, 4, 9, 2, 1, 5, 6, 0, 8};
+        return Arrays.toString(IntStream.range(0, integers.length).map(i -> integers[integers.length - 1 - i]).toArray());
+    }
+
+    private static List<Integer> getFirst5EvenNumbers() {
+        List<Integer> integers = List.of(7, 4, 9, 2, 1, 5, 6, 0, 8, 10);
+        return integers.stream().filter(i -> i % 2 == 0).limit(5).collect(Collectors.toList());
+    }
+
+    private static int findMostRepeatedNumber() {
+        List<Integer> integers = List.of(7, 4, 9, 2, 1, 5, 6, 0, 8, 9, 9, 6);
+        return integers.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream().max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey).orElse(0);
+    }
+
+
+
+    private static long countItemIds(List<Transaction> transactionList, int id) {
+        return transactionList.stream()
+                .flatMap(t -> t.getItems().stream())
+                .filter(i -> i.getItemId() == id)
+                .count();
+    }
+
+}
+
+class Transaction {
+    private List<Item> items;
+    Transaction(List<Item> items) { this.items = items; }
+    public List<Item> getItems() { return this.items; }
+}
+
+class Item {
+    private int itemId;
+    Item(int id) { this.itemId = id; }
+    public int getItemId() { return this.itemId; }
 }
