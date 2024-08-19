@@ -44,9 +44,9 @@ public class JavaStreamProblems {
         System.out.println("Reverse an integer array : " + reverseIntegerArray());
         System.out.println("Print the first 5 even numbers : " + getFirst5EvenNumbers());
         System.out.println("Find the most repeated element in an array : " + findMostRepeatedNumber());
-//        System.out.println("Check if a string is a palindrome using Java 8 streams. Write a Java 8 program to check if a given string is a palindrome using the stream API and lambda expressions." + );
-//        System.out.println("Find strings in a list that start with a number. Given a list of strings, write a Java 8 program to find the strings that start with a number." + );
-//        System.out.println("Extract duplicate elements from an array. Write a Java 8 program to extract duplicate elements from an array." + );
+        System.out.println("Check if a string is a palindrome using Java 8 streams: " + isStringPalindrome());
+        System.out.println("Find strings in a list that start with a number: " + findStringInListStartsWithNumber());
+        System.out.println("Extract duplicate elements from an array: " + extractDuplicatesFromArray());
 //        System.out.println("Print duplicate characters in a string. Write a Java 8 program to print the duplicate characters in a string." + );
 //        System.out.println("Find the first repeated character in a string. Write a Java 8 program to find the first repeated character in a string." + );
 //        System.out.println("Find the first non-repeated character in a string. Write a Java 8 program to find the first non-repeated character in a string." + );
@@ -214,6 +214,32 @@ public class JavaStreamProblems {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet().stream().max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey).orElse(0);
+    }
+
+    private static String isStringPalindrome() {
+        String str = "popop";
+        return IntStream.range(0, str.length() / 2).allMatch(i -> str.charAt(i) == str.charAt(str.length() - i - 1))
+                ? "String " + str + " is a palindrome!"
+                : "String " + str + " is not a palindrome!";
+    }
+
+    private static String findStringInListStartsWithNumber() {
+        List<String> strings = List.of("safaas", "2fasdfds", "asdfd", "asdfa", "5dfsgds", "w33fdsaf");
+        List<String> numbers = List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+        return strings.stream().filter(s -> Character.isDigit(s.charAt(0))).collect(Collectors.joining(", "));
+    }
+
+    private static String extractDuplicatesFromArray() {
+        int[] arr = {1, 2, 3, 4, 4, 5, 6, 7, 7, 2, 9, 1, 0};
+        List<Integer> arr1 = List.of(1, 2, 3, 4, 4, 5, 6, 7, 7, 2, 9, 1, 0);
+        return arr1.stream()
+                .collect(Collectors.groupingBy(i -> i, Collectors.counting()))
+                .entrySet()
+                    .stream()
+                    .filter(e -> e.getValue() > 1)
+                    .map(Map.Entry::getKey)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
     }
 
 
